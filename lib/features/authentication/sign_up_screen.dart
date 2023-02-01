@@ -106,7 +106,9 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Container(
-            color: isDarkMode(context) ? null : Colors.grey.shade50,
+            color: isDarkMode(context)
+                ? Theme.of(context).appBarTheme.backgroundColor
+                : Colors.grey.shade50,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: Sizes.size32,

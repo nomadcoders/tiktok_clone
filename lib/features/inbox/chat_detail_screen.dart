@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key});
@@ -34,16 +35,16 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           subtitle: const Text('Active now'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               FaIcon(
                 FontAwesomeIcons.flag,
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
                 size: Sizes.size20,
               ),
               Gaps.h32,
               FaIcon(
                 FontAwesomeIcons.ellipsis,
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
                 size: Sizes.size20,
               ),
             ],
@@ -101,15 +102,13 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           Positioned(
             bottom: 0,
             width: MediaQuery.of(context).size.width,
-            child: BottomAppBar(
-              color: Colors.grey.shade50,
+            child: Container(
+              color: isDarkMode(context) ? Colors.black : Colors.grey.shade50,
               child: Row(
-                children: [
-                  const Expanded(child: TextField()),
+                children: const [
+                  Expanded(child: TextField()),
                   Gaps.h20,
-                  Container(
-                    child: const FaIcon(FontAwesomeIcons.paperPlane),
-                  )
+                  FaIcon(FontAwesomeIcons.paperPlane)
                 ],
               ),
             ),
