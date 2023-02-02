@@ -50,17 +50,13 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Sign up for {nameOfTheApp} {when}`
-  String signUpTitle(String nameOfTheApp, DateTime when) {
-    final DateFormat whenDateFormat =
-        DateFormat('💖 LLLL 😱 Hm', Intl.getCurrentLocale());
-    final String whenString = whenDateFormat.format(when);
-
+  /// `Sign up for {nameOfTheApp}`
+  String signUpTitle(String nameOfTheApp) {
     return Intl.message(
-      'Sign up for $nameOfTheApp $whenString',
+      'Sign up for $nameOfTheApp',
       name: 'signUpTitle',
       desc: 'The title people see when they open the app for the first time.',
-      args: [nameOfTheApp, whenString],
+      args: [nameOfTheApp],
     );
   }
 
