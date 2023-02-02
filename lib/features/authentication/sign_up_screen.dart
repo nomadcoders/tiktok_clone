@@ -13,7 +13,7 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
-    final result = await Navigator.of(context).pushNamed(LoginScreen.routeName);
+    final result = await Navigator.pushNamed(context, LoginScreen.routeName);
     print(result);
   }
 
@@ -34,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
         },
       ),
     ); */
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    Navigator.pushNamed(context, UsernameScreen.routeName);
   }
 
   @override
