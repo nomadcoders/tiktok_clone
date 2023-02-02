@@ -119,6 +119,51 @@ class S {
       args: [gender],
     );
   }
+
+  /// `{potato}`
+  String likeCount(int potato) {
+    final NumberFormat potatoNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String potatoString = potatoNumberFormat.format(potato);
+
+    return Intl.message(
+      '$potatoString',
+      name: 'likeCount',
+      desc: 'Anything you want',
+      args: [potatoString],
+    );
+  }
+
+  /// `{potato}`
+  String commentCount(int potato) {
+    final NumberFormat potatoNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String potatoString = potatoNumberFormat.format(potato);
+
+    return Intl.message(
+      '$potatoString',
+      name: 'commentCount',
+      desc: 'Anything you want',
+      args: [potatoString],
+    );
+  }
+
+  /// `{value} {value2, plural, =1{comment} other{comments}}`
+  String commentTitle(int value, num value2) {
+    final NumberFormat valueNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String valueString = valueNumberFormat.format(value);
+
+    return Intl.message(
+      '$valueString ${Intl.plural(value2, one: 'comment', other: 'comments')}',
+      name: 'commentTitle',
+      desc: 'Anything you want',
+      args: [valueString, value2],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
