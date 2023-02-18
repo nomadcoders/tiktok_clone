@@ -1,42 +1,45 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/view_models/signup_view_model.dart';
-import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_clone/features/authentication/views/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/views/widgets/form_button.dart';
 
-class BirthdayScreen extends ConsumerStatefulWidget {
-  const BirthdayScreen({super.key});
+class UsernameScreen extends StatefulWidget {
+  const UsernameScreen({super.key});
 
   @override
-  ConsumerState<BirthdayScreen> createState() => _BirthdayScreenState();
+  State<UsernameScreen> createState() => _UsernameScreenState();
 }
 
-class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
-  final TextEditingController _birthdayController = TextEditingController();
+class _UsernameScreenState extends State<UsernameScreen> {
+  final TextEditingController _usernameController = TextEditingController();
 
-  DateTime initialDate = DateTime.now();
+  String _username = "";
 
   @override
   void initState() {
     super.initState();
-    _setTextFieldDate(initialDate);
+    _usernameController.addListener(() {
+      setState(() {
+        _username = _usernameController.text;
+      });
+    });
   }
 
   @override
   void dispose() {
-    _birthdayController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
   void _onNextTap() {
-    ref.read(signUpProvider.notifier).signUp(context);
-  }
-
-  void _setTextFieldDate(DateTime date) {
-    final textDate = date.toString().split(" ").first;
-    _birthdayController.value = TextEditingValue(text: textDate);
+    if (_username.isEmpty) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EmailScreen(username: _username),
+      ),
+    );
   }
 
   @override
@@ -56,7 +59,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
           children: [
             Gaps.v40,
             const Text(
-              "When's your birthday?",
+              "Create username",
               style: TextStyle(
                 fontSize: Sizes.size24,
                 fontWeight: FontWeight.w700,
@@ -64,7 +67,7 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
             ),
             Gaps.v8,
             const Text(
-              "Your birthday won't be shown publicly.",
+              "You can always change this later.",
               style: TextStyle(
                 fontSize: Sizes.size16,
                 color: Colors.black54,
@@ -72,9 +75,9 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
             ),
             Gaps.v16,
             TextField(
-              enabled: false,
-              controller: _birthdayController,
+              controller: _usernameController,
               decoration: InputDecoration(
+                hintText: "Username",
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.grey.shade400,
@@ -91,20 +94,9 @@ class _BirthdayScreenState extends ConsumerState<BirthdayScreen> {
             Gaps.v28,
             GestureDetector(
               onTap: _onNextTap,
-              child: FormButton(
-                disabled: ref.watch(signUpProvider).isLoading,
-              ),
+              child: FormButton(disabled: _username.isEmpty),
             ),
           ],
-        ),
-      ),
-      bottomNavigationBar: SizedBox(
-        height: 300,
-        child: CupertinoDatePicker(
-          maximumDate: initialDate,
-          initialDateTime: initialDate,
-          mode: CupertinoDatePickerMode.date,
-          onDateTimeChanged: _setTextFieldDate,
         ),
       ),
     );
