@@ -48,6 +48,27 @@ export const onLikedCreated = functions.firestore
       .update({
         likes: admin.firestore.FieldValue.increment(1),
       });
+    const video = await (
+      await db.collection("videos").doc(videoId).get()
+    ).data();
+    if (video) {
+      const creatorUid = video.creatorUid;
+      const user = await (
+        await db.collection("users").doc(creatorUid).get()
+      ).data();
+      if (user) {
+        const token = user.token;
+        await admin.messaging().sendToDevice(token, {
+          data: {
+            screen: "123",
+          },
+          notification: {
+            title: "someone liked you video",
+            body: "Likes + 1 ! Congrats! 💖",
+          },
+        });
+      }
+    }
   });
 
 export const onLikedRemoved = functions.firestore
