@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tiktok_clone/features/inbox/models/message.dart';
@@ -20,8 +21,9 @@ class MessagesViewModel extends AsyncNotifier<void> {
       final message = MessageModel(
         text: text,
         userId: user!.uid,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
       );
-      _repo.sendMessage(message);
+      await _repo.sendMessage(message);
     });
   }
 }
@@ -29,3 +31,23 @@ class MessagesViewModel extends AsyncNotifier<void> {
 final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
   () => MessagesViewModel(),
 );
+
+final chatProvider = StreamProvider<List<MessageModel>>((ref) {
+  final db = FirebaseFirestore.instance;
+
+  return db
+      .collection("chat_rooms")
+      .doc("5wIEF4qSGhFMKms4Pjuu")
+      .collection("texts")
+      .orderBy("createdAt")
+      .snapshots()
+      .map(
+        (event) => event.docs
+            .map(
+              (doc) => MessageModel.fromJson(
+                doc.data(),
+              ),
+            )
+            .toList(),
+      );
+});
