@@ -624,6 +624,9 @@ PODS:
   - Firebase/Functions (10.3.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 10.3.0)
+  - Firebase/Messaging (10.3.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.3.0)
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
@@ -633,6 +636,10 @@ PODS:
     - Flutter
   - firebase_core (2.7.0):
     - Firebase/CoreOnly (= 10.3.0)
+    - Flutter
+  - firebase_messaging (14.2.5):
+    - Firebase/Messaging (= 10.3.0)
+    - firebase_core
     - Flutter
   - firebase_storage (11.0.13):
     - Firebase/Storage (= 10.3.0)
@@ -674,6 +681,20 @@ PODS:
     - FirebaseMessagingInterop (~> 10.0)
     - FirebaseSharedSwift (~> 10.0)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+  - FirebaseInstallations (10.5.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.3.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseMessagingInterop (10.5.0)
   - FirebaseSharedSwift (10.5.0)
   - FirebaseStorage (10.3.0):
@@ -685,6 +706,10 @@ PODS:
   - Flutter (1.0.0)
   - gallery_saver (0.0.1):
     - Flutter
+  - GoogleDataTransport (9.2.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/AppDelegateSwizzler (7.11.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -699,6 +724,8 @@ PODS:
     - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (7.11.0)"
   - GoogleUtilities/Reachability (7.11.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.44.0)":
     - "gRPC-C++/Implementation (= 1.44.0)"
@@ -784,6 +811,7 @@ DEPENDENCIES:
   - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - gallery_saver (from `.symlinks/plugins/gallery_saver/ios`)
@@ -806,9 +834,12 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseFirestore
     - FirebaseFunctions
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseMessagingInterop
     - FirebaseSharedSwift
     - FirebaseStorage
+    - GoogleDataTransport
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -829,6 +860,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
@@ -855,6 +888,7 @@ SPEC CHECKSUMS:
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   firebase_auth: 1683261c732cd83b8b69223252a6f7a1446779b5
   firebase_core: 128d8c43c3a453a4a67463314fc3761bedff860b
+  firebase_messaging: 8ac28baba96e69a58ad26b4bb5f9ee67c3e5efe2
   firebase_storage: 1cf1f798f92d7d66b0bab3d866f63f1bf41def1c
   FirebaseAppCheckInterop: 95bc238f8755d597cad95815b3c448f8617f720f
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
@@ -864,11 +898,14 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: e463f41bb935cd049505bf7e9a5bdd7dcea90df6
   FirebaseFirestore: 244f71ff14ef44f39e00b44d356eac708ce03103
   FirebaseFunctions: d8415d2237cc807d05fa0a921d645f50a0d9d803
+  FirebaseInstallations: 935bc4abb6f7a035cab7a0c31cb777b2be3dd254
+  FirebaseMessaging: e345b219fd15d325f0cf2fef28cb8ce00d851b3f
   FirebaseMessagingInterop: 1fc10aa48ca7bd70747d8211190890dccdfb9c65
   FirebaseSharedSwift: 30289ed76ccb441067a2cd3472cc5b2f491b9d8f
   FirebaseStorage: 0efbff0ac978981866d89804191688ae50d64033
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   gallery_saver: 9fc173c9f4fcc48af53b2a9ebea1b643255be542
+  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
